@@ -1,11 +1,12 @@
 
+const readline = require("readline");
+const chalk = require("chalk");
+const isValid = require("./util/validity");
+const mastermind = require("./mastermind");
+
 (function (global) {
 	"use strict";
 
-	const readline = require("readline");
-	const chalk = require("chalk");
-	const isValid = require("./util/validity");
-	const mastermind = require("./mastermind");
 	const log = console.log;
 
 	const rl = readline.createInterface({
