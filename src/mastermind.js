@@ -1,18 +1,15 @@
 
 const solver = require("./solver");
+const Board = require("./board");
 
-const mastermind = function (size, pegs, guesses) {
-	console.log(guesses);
-	console.log(pegs);
+const mastermind = function (size, numberOfPegsInAGuess, keys, givenGuesses) {
+	const guesses = [];
 
-	const board = [];
-
-	// Build initial board
 	for (let i = 0; i < size; i++)
-		board.push(0);
+		guesses.push(new Board(givenGuesses[i], keys[i]));
 
-	// Start at the first guess and check black keys.
-	return solver(size, pegs, guesses, board, 0, 0);
+	// Start at the first guess and check black keys first.
+	return solver(size, numberOfPegsInAGuess, guesses);
 };
 
 module.exports = mastermind;
