@@ -1,4 +1,3 @@
-
 /**
  * Deep Copyer
  * Performs a deep copy on object literals and arrays and covers all nested
@@ -52,11 +51,11 @@ function deepMergeObject(target, ...sources) {
     for (const source of sources) {
         for (const item in source) {
             src = source[item];
-            target[item] =  isObject(src) ?
-                            Object.assign({}, deepMergeObject({}, src)) : (
-                                isArray(src) ?
-                                deepMergeArray([], src) :
-                                source[item]);
+            target[item] = isObject(src) ?
+                Object.assign({}, deepMergeObject({}, src)) : (
+                    isArray(src) ?
+                    deepMergeArray([], src) :
+                    source[item]);
         }
     }
 
@@ -91,6 +90,8 @@ function deepMergeArray(target, ...sources) {
     return target;
 }
 
-module.exports =  { isDeepCopy: isDeepCopy,
-					object: deepMergeObject,
-					array: deepMergeArray };
+module.exports = {
+    isDeepCopy: isDeepCopy,
+    object: deepMergeObject,
+    array: deepMergeArray
+};
