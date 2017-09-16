@@ -1,4 +1,3 @@
-
 module.exports = {
     0: undefined,
     1: "Blue",

@@ -3,10 +3,10 @@ module.exports = class {
         const board = sequence;
         const keysArray = keys;
 
-        this.getBoard = function() {
+        this.getBoard = function () {
             return board;
         };
-        this.getKeys = function() {
+        this.getKeys = function () {
             return keysArray;
         };
     }

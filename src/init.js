@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const isValid = require("./util/validity");
 const mastermind = require("./mastermind");
 
-(function(global) {
+(function (global) {
     const log = console.log;
 
     const rl = readline.createInterface({
@@ -26,7 +26,8 @@ const mastermind = require("./mastermind");
             rl.question("Use a pre-loaded guess? ", answer => {
                 if (answer === "no") {
                     rl.on("line", input => {
-                        let guess = input.trim().split(/[\s]+/);
+                        let guess = input.trim()
+                            .split(/[\s]+/);
 
                         if (!isValid(guess, size))
                             throw new Error("A supplied guess is in correct.");

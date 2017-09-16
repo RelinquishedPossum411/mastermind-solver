@@ -1,7 +1,7 @@
 const solver = require("./solver");
 const Board = require("./board");
 
-const mastermind = function(size, numberOfPegsInAGuess, keys, givenGuesses) {
+const mastermind = function (size, numberOfPegsInAGuess, keys, givenGuesses) {
     const guesses = [];
 
     for (let i = 0; i < size; i++)

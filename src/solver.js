@@ -5,7 +5,7 @@ const copy = require("./util/copy");
 const colors = require("./util/colors");
 const Board = require("./board");
 
-module.exports = function(size, numberOfPegsInAGuess, guesses) {
+module.exports = function (size, numberOfPegsInAGuess, guesses) {
     const log = console.log;
 
     // Counter for the number of working guesses. Delete later if not needed.
@@ -83,7 +83,8 @@ module.exports = function(size, numberOfPegsInAGuess, guesses) {
             // log(solution);
             // log(guesses[i].getBoard());
 
-            if (guesses[i].getBoard().includes(currentColor) &&
+            if (guesses[i].getBoard()
+                .includes(currentColor) &&
                 count(solution, currentColor) < count(guesses[i].getBoard(), currentColor)) {
                 // Return false if the value of the keys after subtracting 1 and
                 // the number of keys in the instance of the key array is less

@@ -1,4 +1,4 @@
-module.exports = function(size) {
+module.exports = function (size) {
     const keys = [];
 
     for (; size > 0; size--)
