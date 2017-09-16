@@ -29,7 +29,18 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
 	return solutions;
 
 
+	/**
+	 * Fills in the solutions array with potential solutions that contain pegs
+	 * that are in the correct position and of the correct color.
+	 *
+	 * @param guess the current guess number
+	 * @param position the current position in the current guess
+	 * @param solution the set of possibly correct pegs
+	 * @param keysArray the set of all keys for all guesses
+	 * @param all the array containing the potential solutions
+	 */
 	function blackKeysGuess(guess, position, solution, keysArray, all) {
+		// Prevent stack overflow
 		if (position >= numberOfPegsInAGuess)
 			return;
 
@@ -94,22 +105,24 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
 			}
 		}
 
-		// Subtract 1 from the guesses if it permits, else return false.
+		// Subtract 1 from the guesses if it permits, else return break and
+		// prevent the current "potential solution" to be added to the set of
+		// solutions.
 		if (guesses[guess].getKeys()[0] - keysArray[guess][0] - 1 < 0) {
 			log("\t\tFAILED AT GUESS UNABLE TO SUBTRACT BLACK KEY: (" + guesses[guess].getKeys()[0] + " - " + keysArray[guess][0] + ")");
 			return;
 		} else {
+			// Otherwise subtract a black key and add the peg to the potential
+			// solution.
 			keysArray[guess][0]++;
 			solution[position] = currentColor;
 		}
 
-		// Recurse to all subsequent guesses ONLY if we do not exceed the
-		// bounds.
 		// Copy the solution array so they are independent.
 		if (position + 1 >= numberOfPegsInAGuess - 1) {
 			log("DONE.");
 
-			// Make sure there are no duplicates.
+			// Make sure there are no duplicates of the same solution.
 			if (!all.some(a => copy.isDeepCopy(solution, a.getBoard()) && copy.isDeepCopy(keysArray, a.getKeys())))
 				all.push(new Board(solution, keysArray));
 
@@ -118,6 +131,8 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
 			return;
 		}
 
+		// Recurse to all subsequent guesses ONLY if we do not exceed the
+		// bounds.
 		for (let i = 0; i < size; i++)
 			blackKeysGuess(i, position + 1, copy.array(solution), copy.array(keysArray), all);
 	}
@@ -126,6 +141,6 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
 	// Perform this step only if there are white keys. Make a pass through the
 	// all the guesses to check this.
 	function solveWhiteKeys() {
-		
+
 	}
 };
