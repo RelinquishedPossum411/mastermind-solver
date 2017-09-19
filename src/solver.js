@@ -140,6 +140,10 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
     // Solve the white keys by plugging in all colors and see if it works.
     // Perform this step only if there are white keys. Make a pass through the
     // all the guesses to check this.
+    // A peg fits in a guess if there is a white key and a same colored peg is
+    // not in the position in the potential solution. Also, the count of the
+    // same colored peg in the potential solution must not exceed that of the
+    // guess plus 1 for the peg we are "adding".
     function solveWhiteKeys() {
 
     }
