@@ -16,17 +16,20 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
     // 2. Find all the correct colors in the wrong position: reduce the number
     //    of white keys to none in all guesses.
     // 3. Fill any remaining slots on the board.
-    const solutions = [];
 
-    // Solve all the black keys first. By assuming that any given keys can be
-    // in the correct position and is of the correct color. If we can deduce
-    // some kind of contradiction from that assumption, then we can invalidate
-    // that answer.
-    for (let i = 0; i < size; i++)
-        blackKeysGuess(i, 0, [0, 0, 0, 0], createKeyArray(size), solutions);
+    // For now, return only the solutions after solving for the correct pegs.
+    return solveBlackKeys();
 
-    return solutions;
+    function solveBlackKeys() {
+        // Solve all the black keys first. By assuming that any given keys can be
+        // in the correct position and is of the correct color. If we can deduce
+        // some kind of contradiction from that assumption, then we can invalidate
+        // that answer.
+        for (let i = 0; i < size; i++)
+            blackKeysGuess(i, 0, [0, 0, 0, 0], createKeyArray(size), []);
 
+        return solutions;
+    }
 
     /**
      * Fills in the solutions array with potential solutions that contain pegs
@@ -126,8 +129,6 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
             if (!all.some(a => copy.isDeepCopy(solution, a.getBoard()) && copy.isDeepCopy(keysArray, a.getKeys())))
                 all.push(new Board(solution, keysArray));
 
-            log("SOL: " + all.length);
-
             return;
         }
 
@@ -146,5 +147,16 @@ module.exports = function (size, numberOfPegsInAGuess, guesses) {
     // guess plus 1 for the peg we are "adding".
     function solveWhiteKeys() {
 
+    }
+
+    function whiteKeysGuess(position, solution, keysArray) {
+        // If successful, then update the solution, else remove it from the
+        // solution set.
+        if (position >= solution.length)
+            return;
+
+        // Go through each position in the solution and find an empty slot, a
+        // slot containing 0, and attempt to fill it with a peg.
+        // Create a case for every single color.
     }
 };
